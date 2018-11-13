@@ -1,24 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Personal ID</th>
+            <th>Full name</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let app of apps; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{app.id}}</td>
+            <td>{{app.name}}</td>
+            <td>{{app.description}}</td>
+            <td id="actionTd">
+              <button class="btn btn-secondary info" (click)="delete(app.id, i)">Delete</button>
+              <button class="btn btn-info info" (click)="delete(app.id, i)">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-6 input-area align-items-start">
+      <br><br>
+      <b>Personal ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId">{{index}}<br>
+      <b>Full name:</b><br><input type="text" class="form-control" [(ngModel)]="inputName"> <br>
+      <b>Description:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="post()"><br><br>
+      <button class="btn btn-info send" (click)="post()">Send</button>
+    </div>
 
- <br>
- 
-<table>
-  <tr>
-    <th>Lp</th>
-    <th>Id</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Action</th>
-  </tr>
-  <tr *ngFor="let app of apps; let i = index">
-    <td>{{i+1}}</td>
-    <td>{{app.id}}</td>
-    <td>{{app.name}}</td>
-    <td>{{app.description}}</td>
-    <td><button (click)="delete(app.id, i)">Delete</button></td>
-  </tr>
-</table>
-<br><br>
-Id: <input type="text" [(ngModel)]="inputId"><br><br>
-Name: <input type="text" [(ngModel)]="inputName"><br><br>
-Description: <input type="text" [(ngModel)]="inputDescription"><br><br>
-<button (click)="post()">Send</button>
+  </div>
+</div>
+
+
+
+

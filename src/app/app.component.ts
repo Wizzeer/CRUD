@@ -30,6 +30,13 @@ export class AppComponent implements OnInit {
       name: this.inputName,
       description: this.inputDescription
     }).subscribe((data:any)=>this.ngOnInit());
+    this.clearInputBox();
+  }
+
+  clearInputBox(){
+    this.inputId='';
+    this.inputName='';
+    this.inputDescription='';
   }
 
 
