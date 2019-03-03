@@ -12,9 +12,9 @@
               </button>
             </div>
             <div class="modal-body">
-              <b>Personal ID:</b> {{modalId}}<br>
-              <b>Name:</b> {{modalName}}<br>
-              <b>Description:</b> {{modalDescription}}<br>
+              <b>ID:</b> {{modalId}}<br>
+              <b>Client:</b> {{modalName}}<br>
+              <b>Contract:</b> {{modalDescription}}<br>
               <br>Are you sure you want update this?
             </div>
             <div class="modal-footer">
@@ -37,9 +37,9 @@
             </div>
             <div class="modal-body">
               You are going to delete following record:<br>
-              <b>Personal ID:</b> {{modalId}}<br>
-              <b>Name:</b> {{modalName}}<br>
-              <b>Description:</b> {{modalDescription}}<br>
+              <b>ID:</b> {{modalId}}<br>
+              <b>Client:</b> {{modalName}}<br>
+              <b>Contract:</b> {{modalDescription}}<br>
               <br>This action can't be undone. Would you like to proceed?
             </div>
             <div class="modal-footer">
@@ -54,9 +54,9 @@
         <thead>
           <tr>
             <th id="idHash">#</th>
-            <th>Personal ID</th>
-            <th>Full name</th>
-            <th>Description</th>
+            <th>ID</th>
+            <th>Client</th>
+            <th>Contract</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -78,9 +78,9 @@
       <div class="input-area">
         <!-------Div while not editing records------->
         <div *ngIf="! isEditing">
-          <b>Personal ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId" (keyup.enter)="post()"><br>
-          <b>Full name:</b><br><input type="text" class="form-control" [(ngModel)]="inputName" (keyup.enter)="post()"><br>
-          <b>Description:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="post()"><br><br>
+          <b>ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId" (keyup.enter)="post()"><br>
+          <b>Client:</b><br><input type="text" class="form-control" [(ngModel)]="inputName" (keyup.enter)="post()"><br>
+          <b>Contract:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="post()"><br><br>
           <button class="btn btn-info send" (click)="post()">Send</button>
           <!--------Alerts-------->
           <span>
@@ -126,10 +126,10 @@
         <!-------Div while editing records------->
         <div *ngIf="isEditing">
           <br><br>
-          <b>Personal ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId" readonly (keyup.enter)="put()"><br>
-          <b>Full name:</b><br><input #name type="text" class="form-control" [(ngModel)]="inputName" (keyup.enter)="put()">
+          <b>ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId" readonly (keyup.enter)="put()"><br>
+          <b>Client:</b><br><input #name type="text" class="form-control" [(ngModel)]="inputName" (keyup.enter)="put()">
           <br>
-          <b>Description:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="put()"><br><br>
+          <b>Contract:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="put()"><br><br>
           <button class="btn btn-info send" (click)="put()">Update</button><br><br>
           <button class="btn btn-danger send" (click)="stopEditing()">Cancel</button>
         </div>
