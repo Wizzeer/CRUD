@@ -1,2 +1,2 @@
 # CRUD
-Angular branch
+Application based on spring, hibernate and angular
