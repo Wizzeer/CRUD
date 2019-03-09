@@ -1,5 +1,7 @@
 package com.wizzeer.contractmanagment.contract;
 
-public class ContractDao {
 
+public interface ContractDao{
+	void addContract(Contract contract);
+	void deleteContract(int id);
 }

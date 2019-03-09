@@ -1,28 +1,39 @@
 package com.wizzeer.contractmanagment.contract;
 
-public class Contract {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public
+class Contract {
+
+	@Id
 	private int id;
 	private String clientName;
-	private String ContractType;
-	
+	private String contractType;
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getClientName() {
 		return clientName;
 	}
+
 	public void setClientName(String clientName) {
 		this.clientName = clientName;
 	}
+
 	public String getContractType() {
-		return ContractType;
+		return contractType;
 	}
+
 	public void setContractType(String contractType) {
-		ContractType = contractType;
+		this.contractType = contractType;
 	}
-	
-	
+
 }

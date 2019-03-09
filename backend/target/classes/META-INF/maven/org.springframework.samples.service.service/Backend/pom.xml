@@ -5,7 +5,7 @@
 	<groupId>org.springframework.samples.service.service</groupId>
 	<artifactId>Backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+
 
 	<properties>
 
