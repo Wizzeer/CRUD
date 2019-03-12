@@ -1,5 +1,6 @@
 package com.wizzeer.contractmanagment.contract;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,7 +10,9 @@ class Contract {
 
 	@Id
 	private int id;
+	@Column(name="client_name")
 	private String clientName;
+	@Column(name="contract_type")
 	private String contractType;
 
 	public int getId() {
