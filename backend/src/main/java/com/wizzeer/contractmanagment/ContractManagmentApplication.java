@@ -8,34 +8,29 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.wizzeer.contractmanagment.config.Config;
+import com.wizzeer.contractmanagment.config.WebConfig;
 
 
 
-public class ContractManagmentApplication {
+public class ContractManagmentApplication extends AbstractAnnotationConfigDispatcherServletInitializer{
 
-	public static void main(String[] args) {
-		ApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
+	@Override
+	protected Class<?>[] getRootConfigClasses() {
+		return new Class[] {Config.class};
+	}
+
+	@Override
+	protected Class<?>[] getServletConfigClasses() {
+		return new Class[] {WebConfig.class};
+	}
+
+	@Override
+	protected String[] getServletMappings() {
+		return new String[] { "/"};
 	}
 	
-	@Configuration
-	public class RestConfig {
-	    @Bean
-	    public CorsFilter corsFilter() {
-	        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-	        CorsConfiguration config = new CorsConfiguration();
-	        config.setAllowCredentials(true);
-	        config.addAllowedOrigin("*");
-	        config.addAllowedHeader("*");
-	        config.addAllowedMethod("OPTIONS");
-	        config.addAllowedMethod("GET");
-	        config.addAllowedMethod("POST");
-	        config.addAllowedMethod("PUT");
-	        config.addAllowedMethod("DELETE");
-	        source.registerCorsConfiguration("/**", config);
-	        return new CorsFilter(source);
-	    }
-	}
-
+	
 }

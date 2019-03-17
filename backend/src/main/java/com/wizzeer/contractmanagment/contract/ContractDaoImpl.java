@@ -16,18 +16,18 @@ public class ContractDaoImpl implements ContractDao {
 
 
 	
-	@Override
 	public void addContract(Contract contract) {
 		this.sessionFactory.getCurrentSession() 
 			.save(contract);
 		
 	}
 
-	@Override
+
 	public void deleteContract(int id) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
 
 }
