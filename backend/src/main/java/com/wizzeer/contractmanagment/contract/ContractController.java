@@ -1,16 +1,17 @@
 package com.wizzeer.contractmanagment.contract;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 @EnableWebMvc
 @RestController
 public class ContractController {
@@ -18,16 +19,29 @@ public class ContractController {
 	@Autowired
 	private ContractService contractService;
 	
-	@CrossOrigin(origins = "http://localhost:8080")
 	@RequestMapping("/contracts")
-	public Contract addContract(/*@RequestBody Contract contract*/) {
-		//contractService.addContract(contract);
-		Contract ctr = new Contract();
-		ctr.setId(1);
-		ctr.setClientName("name");
-		ctr.setContractType("s");
-		return ctr;
+	public List<Contract> getAllContracts() {
+		return contractService.getAllContracts();
 	}
 	
-
+	@RequestMapping("/contracts/{id}")
+	public Contract getContract(@PathVariable int id) {
+		return contractService.getContract(id);
+	}
+	
+	@PutMapping("/contracts/{id}")
+	public void updateContract(@RequestBody Contract contract, @PathVariable int id) {
+		contractService.updateContract(contract, id);
+	}
+	
+	@PostMapping("/contracts")
+	public void addContract(@RequestBody Contract contract) {
+		contractService.addContract(contract);
+	}
+	
+	@DeleteMapping("/contracts/{id}")
+	public void deleteContract(@PathVariable int id) {
+		contractService.deleteContract(id);
+	}
+	
 }

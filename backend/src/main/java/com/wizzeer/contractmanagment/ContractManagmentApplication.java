@@ -1,13 +1,5 @@
 package com.wizzeer.contractmanagment;
 
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.wizzeer.contractmanagment.config.Config;
@@ -29,7 +21,7 @@ public class ContractManagmentApplication extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] { "/"};
+		return new String[] {"/"};
 	}
 	
 	
