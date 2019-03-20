@@ -4,6 +4,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import com.wizzeer.contractmanagment.config.Config;
 import com.wizzeer.contractmanagment.config.WebConfig;
+import com.wizzeer.contractmanagment.config.WebSecurityConfig;
 
 
 
@@ -11,7 +12,8 @@ public class ContractManagmentApplication extends AbstractAnnotationConfigDispat
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] {Config.class};
+		return new Class[] {Config.class, 
+							WebSecurityConfig.class};
 	}
 
 	@Override
