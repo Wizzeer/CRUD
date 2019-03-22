@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('http://localhost:8080/api/topics')
+    this.http.get('http://localhost:8080/Backend/contracts')
       .subscribe(response => {
         this.response = response;
         this.apps = response as Applications[];
@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
 
   delete() {
     this.apps.splice(this.modalIndex, 1);
-    this.http.delete('http://localhost:8080/api/topics/' + this.modalId).subscribe();
+    this.http.delete('http://localhost:8080/Backend/contracts/' + this.modalId).subscribe();
     this.clearInputBox();
     this.isEditing = false;
     this.showDeleteAlert();
@@ -61,10 +61,10 @@ export class AppComponent implements OnInit {
 
 
   put(id: any) {
-    this.http.put('http://localhost:8080/api/topics/' + id, {
+    this.http.put('http://localhost:8080/Backend/contracts/' + id, {
       id: this.inputId,
-      name: this.inputName,
-      description: this.inputDescription
+      clientName: this.inputName,
+      contractType: this.inputDescription
     }).subscribe((data: any) => this.ngOnInit());
     this.stopEditing();
     this.showUpdateAlert();
@@ -72,10 +72,10 @@ export class AppComponent implements OnInit {
 
   post() {
     if (this.checkInputLength() || this.checkIfAlreadyExist() || this.checkIfNumber()) return;
-    this.http.post('http://localhost:8080/api/topics', {
+    this.http.post('http://localhost:8080/Backend/contracts', {
       id: this.inputId,
-      name: this.inputName,
-      description: this.inputDescription
+      clientName: this.inputName,
+      contractType: this.inputDescription
     }).subscribe((data: any) => this.ngOnInit());
     this.showSuccessAlert();
     this.clearInputBox();
@@ -87,8 +87,8 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < this.apps.length; i++) {
       if (this.apps[i].id == this.inputId) {
         this.modalId = this.apps[i].id;
-        this.modalName = this.apps[i].name;
-        this.modalDescription = this.apps[i].description;
+        this.modalName = this.apps[i].clientName;
+        this.modalDescription = this.apps[i].contractType;
         this.askIfUpdate();
         return true;
       }
@@ -132,8 +132,8 @@ export class AppComponent implements OnInit {
   edit(id: any, index: number) {
     this.isEditing = true
     this.inputId = this.apps[index].id;
-    this.inputName = this.apps[index].name;
-    this.inputDescription = this.apps[index].description;
+    this.inputName = this.apps[index].clientName;
+    this.inputDescription = this.apps[index].contractType;
     this.editName();
   }
 
@@ -193,6 +193,6 @@ export class AppComponent implements OnInit {
 
 interface Applications {
   id: string;
-  name: string;
-  description: string;
+  clientName: string;
+  contractType: string;
 }

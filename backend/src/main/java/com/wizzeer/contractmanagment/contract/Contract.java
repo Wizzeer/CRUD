@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Contract {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="contract_id")
 	private int id;
 	@Column(name="client_name")
 	private String clientName;

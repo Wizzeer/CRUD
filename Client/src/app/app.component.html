@@ -64,8 +64,8 @@
           <tr *ngFor="let app of apps; let i = index">
             <td>{{i+1}}</td>
             <td>{{app.id}}</td>
-            <td>{{app.name}}</td>
-            <td>{{app.description}}</td>
+            <td>{{app.clientName}}</td>
+            <td>{{app.contractType}}</td>
             <td id="actionTd">
               <button class="btn btn-secondary info" (click)="askIfDelete(app.id, app.name, app.description, i)">Delete</button>
               <button class="btn btn-info editButton" (click)="edit(app.id, i)">Edit</button>
@@ -126,11 +126,11 @@
         <!-------Div while editing records------->
         <div *ngIf="isEditing">
           <br><br>
-          <b>ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId" readonly (keyup.enter)="put()"><br>
-          <b>Client:</b><br><input #name type="text" class="form-control" [(ngModel)]="inputName" (keyup.enter)="put()">
+          <b>ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId" readonly (keyup.enter)="put(inputId)"><br>
+          <b>Client:</b><br><input #name type="text" class="form-control" [(ngModel)]="inputName" (keyup.enter)="put(inputId)">
           <br>
-          <b>Contract:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="put()"><br><br>
-          <button class="btn btn-info send" (click)="put()">Update</button><br><br>
+          <b>Contract:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="put(inputId)"><br><br>
+          <button class="btn btn-info send" (click)="put(inputId)">Update</button><br><br>
           <button class="btn btn-danger send" (click)="stopEditing()">Cancel</button>
         </div>
         <!-------End of Div while editing records------->
