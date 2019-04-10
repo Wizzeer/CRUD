@@ -39,8 +39,7 @@ export class AppComponent implements OnInit {
   }
 
   delete() {
-    this.apps.splice(this.modalIndex, 1);
-    this.http.delete('http://localhost:8080/Backend/contracts/' + this.modalId).subscribe();
+    this.http.delete('http://localhost:8080/Backend/contracts/' + this.modalId).subscribe((data: any) => this.ngOnInit());
     this.clearInputBox();
     this.isEditing = false;
     this.showDeleteAlert();
