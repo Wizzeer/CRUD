@@ -6,7 +6,7 @@ public interface ContractDao{
 	
 	List<Contract> getAllContracts();
 	Contract getContract(int id);
-	void addContract(Contract contract);
+	Contract addContract(Contract contract);
 	void deleteContract(int id);
 	void updateContract(Contract contract, int id);
 }

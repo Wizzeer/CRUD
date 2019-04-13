@@ -12,7 +12,7 @@ public class ApplicationUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="user_id")
     private long id;
-    @Column(name="username")
+    @Column(name="username", unique=true)
     private String username;
     @Column(name="user_password")
     private String password;

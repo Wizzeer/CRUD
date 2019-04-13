@@ -19,10 +19,10 @@ public class ContractDaoImpl implements ContractDao {
 
 
 	
-	public void addContract(Contract contract) {
+	public Contract addContract(Contract contract) {
 		sessionFactory.getCurrentSession() 
 		.save(contract);
-		
+		return contract;
 	}
 
 
