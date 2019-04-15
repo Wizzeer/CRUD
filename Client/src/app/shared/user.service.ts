@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Response } from "@angular/http";
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -7,6 +7,7 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/map';
 import { User } from './user.model';
+import { map } from 'rxjs-compat/operator/map';
 
 @Injectable()
 export class UserService {
@@ -22,10 +23,18 @@ export class UserService {
     return this.http.post(this.rootUrl + '/users/sign-up', body,{headers : reqHeader});
   }
 
-  userAuthentication(userName, password) {
-    var data = "username=" + userName + "&password=" + password + "&grant_type=password";
+  userAuthentication(user: User) {
+    const body: User = {
+      username: user.username,
+      password: user.password,
+    }
     var reqHeader = new HttpHeaders({ 'Content-Type': 'application/json','No-Auth':'True' });
-    return this.http.post(this.rootUrl + '/login', data, { headers: reqHeader });
+    const options = {
+      headers : reqHeader,
+      observe: "response"
+    }
+    console.log(body);
+    return this.http.post(this.rootUrl + '/login', body, {headers: reqHeader, observe: "response"});
   }
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr'
+import { ToastrService } from 'ngx-toastr';
 import { User } from '../../shared/user.model';
 import { UserService } from '../../shared/user.service';
 
@@ -11,7 +11,7 @@ import { UserService } from '../../shared/user.service';
 })
 export class RegisterComponent implements OnInit {
   user: User;
-
+  isLoginError : boolean = false;
   constructor(private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -23,15 +23,21 @@ export class RegisterComponent implements OnInit {
       form.reset();
     this.user = {
       username: '',
-      password: '',
+      password: '', 
     }
   }
 
   OnSubmit(form: NgForm) {
-    this.userService.registerUser(form.value)
-      .subscribe((data: any) => {
-        //console.log(data);
-      });
+    console.log(form.value);
+    this.userService.registerUser(form.value).subscribe((data: any) => {
+      if(data.response=="User added succesfully"){
+        this.toastr.success(data.response);
+      }
+      else{
+        this.toastr.warning(data.response);
+      }
+    });
   }
+
 
 }

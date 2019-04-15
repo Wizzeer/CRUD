@@ -18,6 +18,9 @@ import org.springframework.context.annotation.Bean;
 
 import static com.wizzeer.contractmanagment.security.SecurityConstants.SIGN_UP_URL;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserDetailsServiceImpl userDetailsService;
@@ -47,7 +50,19 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+    final CorsConfiguration config = new CorsConfiguration();
+    config.setAllowCredentials(true);
+    config.setAllowedOrigins(Collections.singletonList("*"));
+    config.addExposedHeader("Authorization");
+    config.setExposedHeaders(Arrays.asList("Authorization"));
+    config.setAllowedHeaders(Arrays.asList("X-Requested-With", "Origin", "Content-Type", "Accept",
+            "Authorization", "Access-Control-Allow-Credentials", "Access-Control-Allow-Headers", "Access-Control-Allow-Methods",
+            "Access-Control-Allow-Origin", "Access-Control-Expose-Headers", "Access-Control-Max-Age",
+            "Access-Control-Request-Headers", "Access-Control-Request-Method", "Age", "Allow", "Alternates",
+            "Content-Range", "Content-Disposition", "Content-Description", "No-Auth"));
+    config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+    source.registerCorsConfiguration("/**", config);
     return source;
   }
+  
 }
