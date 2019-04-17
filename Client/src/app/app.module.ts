@@ -6,9 +6,8 @@ import { AppComponent } from './app.component';
 import { UserService } from './shared/user.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
-import { UserComponent } from './user/user.component';
-import { LoginComponent } from './user/login/login.component';
-import { RegisterComponent } from './user/register/register.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { appRoutes } from './routes';
 import { AuthGuard } from './auth/auth.guard';
@@ -20,7 +19,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     MainComponent,
-    UserComponent,
     LoginComponent,
     RegisterComponent
   ],

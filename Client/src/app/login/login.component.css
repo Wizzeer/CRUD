@@ -1,0 +1,42 @@
+.container{
+    max-width: 700px;
+}
+
+.card{
+    margin-top: 30px;
+}
+
+.card-header{
+    text-align: center;
+    color: rgb(75, 75, 75);
+}
+
+.card-body{
+    text-align: right;
+}
+
+.btn{
+    margin-top: 50px;
+}
+
+#sign-up-link{
+    cursor: pointer;
+    color: royalblue
+}
+
+#sign-up-link:hover{
+    text-decoration: underline;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+#unauthenticated-message{
+    color: red;
+    text-align: left;
+    margin-bottom: 12px;
+}

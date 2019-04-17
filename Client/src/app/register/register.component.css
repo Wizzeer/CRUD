@@ -1,0 +1,48 @@
+.container{
+    max-width: 700px;
+}
+
+.card{
+    margin-top: 30px;
+}
+
+.card-header{
+    text-align: center;
+    color: rgb(75, 75, 75);
+}
+
+.card-body{
+    text-align: right;
+}
+
+.form-group{
+    text-align: left;
+}
+
+.btn{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#log-in-link{
+    cursor: pointer;
+    color: royalblue
+}
+
+#log-in-link:hover{
+    text-decoration: underline;
+}
+
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+#passwordHelpBlock {
+    font-size: x-small;
+    float: left;
+    text-align: left;
+  }

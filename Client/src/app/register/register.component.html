@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col" id="login-header">
+              <h3>Sign Up</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <form #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
+            <div class="form-group">
+              <h5>Username:</h5>
+              <input class="validate form-control" type="text" name="username" #username="ngModel" [(ngModel)]="user.username"
+                required>
+            </div>
+            <div class="form-group">
+              <h5>Password:</h5>
+              <input class="validate form-control" type="password" name="password" #password="ngModel" [(ngModel)]="user.password"
+                required minlength="3">
+              <small id="passwordHelpBlock" class="form-text text-muted">
+                Passwords must be at least 3 characters.
+              </small>
+            </div>
+            <button type="submit" [disabled]="!userRegistrationForm.valid" class="btn btn-primary btn-lg btn-block">Register</button>
+            Already have an account? <a id="log-in-link" (click)="navigateToLogin()">Log in</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../shared/user.model';
-import { UserService } from '../../shared/user.service';
+import { User } from '../shared/user.model';
+import { UserService } from '../shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ import { UserService } from '../../shared/user.service';
 export class RegisterComponent implements OnInit {
   user: User;
   isLoginError : boolean = false;
-  constructor(private userService: UserService, private toastr: ToastrService) { }
+  constructor(private userService: UserService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
     this.resetForm();
@@ -32,6 +33,7 @@ export class RegisterComponent implements OnInit {
     this.userService.registerUser(form.value).subscribe((data: any) => {
       if(data.response=="User added succesfully"){
         this.toastr.success(data.response);
+        this.resetForm(form);
       }
       else{
         this.toastr.warning(data.response);
@@ -39,5 +41,8 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  navigateToLogin() {
+    this.router.navigate(['/login']);
+  }
 
 }
