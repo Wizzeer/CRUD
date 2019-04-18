@@ -1,20 +1,27 @@
 <div class="container-fluid">
   <div class="row">
+    <div class="col pl-0 pr-0">
+      <div id="nav">
+        <button type="button" class="btn btn-light" (click)="logout()"><h6>Logout</h6></button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-12 order-12 order-xl-1 col-xl-6">
       <!--------Update Modal-------->
       <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="false">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Record with that Personal ID already exist in database as:</h5>
+              <h5 class="modal-title">Record with that ID already exist in database as:</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
               <b>ID:</b> {{modalId}}<br>
-              <b>Client:</b> {{modalName}}<br>
-              <b>Contract:</b> {{modalDescription}}<br>
+              <b>Client:</b> {{modalClient}}<br>
+              <b>Contract:</b> {{modalContract}}<br>
               <br>Are you sure you want update this?
             </div>
             <div class="modal-footer">
@@ -38,8 +45,8 @@
             <div class="modal-body">
               You are going to delete following record:<br>
               <b>ID:</b> {{modalId}}<br>
-              <b>Client:</b> {{modalName}}<br>
-              <b>Contract:</b> {{modalDescription}}<br>
+              <b>Client:</b> {{modalClient}}<br>
+              <b>Contract:</b> {{modalContract}}<br>
               <br>This action can't be undone. Would you like to proceed?
             </div>
             <div class="modal-footer">
@@ -67,32 +74,31 @@
             <td>{{app.clientName}}</td>
             <td>{{app.contractType}}</td>
             <td id="actionTd">
-              <button class="btn btn-secondary info" (click)="askIfDelete(app.id, app.name, app.description, i)">Delete</button>
+              <button class="btn btn-secondary info" (click)="askIfDelete(app.id, app.clientName, app.contractType, i)">Delete</button>
               <button class="btn btn-info editButton" (click)="edit(app.id, i)">Edit</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <div class="col-12 order-1 order-xl-12 col-xl-6 align-items-start">
-      <div class="input-area">
+    <div class="col-12 order-1 col-xl-6">
         <!-------Div while not editing records------->
         <div *ngIf="! isEditing">
           <b>ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId" (keyup.enter)="post()"><br>
-          <b>Client:</b><br><input type="text" class="form-control" [(ngModel)]="inputName" (keyup.enter)="post()"><br>
-          <b>Contract:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="post()"><br><br>
-          <button class="btn btn-info send" (click)="post()">Send</button>
+          <b>Client:</b><br><input type="text" class="form-control" [(ngModel)]="inputClient" (keyup.enter)="post()"><br>
+          <b>Contract:</b><br> <input type="text" class="form-control" [(ngModel)]="inputContract" (keyup.enter)="post()"><br><br>
+          <button class="btn btn-info btn-lg btn-block send" (click)="post()">Send</button>
           <!--------Alerts-------->
           <span>
             <div *ngIf="empty">
               <div class="alert alert-danger fade in show" role="alert">
-                Personal ID must have at least 3 digits!
+                ID must have at least 1 digit!
               </div>
             </div>
 
             <div *ngIf="isInputIdNumber">
               <div class="alert alert-danger fade in show" role="alert">
-                Personal ID must be a number!
+                ID must be a number!
               </div>
             </div>
 
@@ -127,14 +133,13 @@
         <div *ngIf="isEditing">
           <br><br>
           <b>ID:</b><br> <input type="text" class="form-control" [(ngModel)]="inputId" readonly (keyup.enter)="put(inputId)"><br>
-          <b>Client:</b><br><input #name type="text" class="form-control" [(ngModel)]="inputName" (keyup.enter)="put(inputId)">
+          <b>Client:</b><br><input #client type="text" class="form-control" [(ngModel)]="inputClient" (keyup.enter)="put(inputId)">
           <br>
-          <b>Contract:</b><br> <input type="text" class="form-control" [(ngModel)]="inputDescription" (keyup.enter)="put(inputId)"><br><br>
-          <button class="btn btn-info send" (click)="put(inputId)">Update</button><br><br>
-          <button class="btn btn-danger send" (click)="stopEditing()">Cancel</button>
+          <b>Contract:</b><br> <input type="text" class="form-control" [(ngModel)]="inputContract" (keyup.enter)="put(inputId)"><br><br>
+          <button class="btn btn-block btn-info send" (click)="put(inputId)">Update</button><br><br>
+          <button class="btn btn-block btn-danger send" (click)="stopEditing()">Cancel</button>
         </div>
-        <!-------End of Div while editing records------->
-      </div><br>
+        <!-------End of Div while editing records-------><br>
       <!--Hidden buttons just for activate modals via ts-->
       <button id="openUpdateModal" [hidden]="true" data-toggle="modal" data-target="#updateModal">Open Modal</button>
       <button id="openDeleteModal" [hidden]="true" data-toggle="modal" data-target="#deleteModal">Open Modal</button>

@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
-import { isNull } from '@angular/compiler/src/output/output_ast';
+import { HttpClient,} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -13,9 +11,9 @@ export class MainComponent implements OnInit {
 
   isEditing: boolean = false;
   response: any;
-  inputName: string = '';
+  inputClient: string = '';
   inputId: string = '';
-  inputDescription: string = '';
+  inputContract: string = '';
   //----Alerts-----
   inputLength: boolean = false;
   alert: boolean = false;
@@ -25,45 +23,46 @@ export class MainComponent implements OnInit {
   isInputIdNumber: boolean = false;
   //----End of Alerts-----
   public apps: Applications[];
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient, private router: Router) {
+  
   }
 
   ngOnInit() {
-    this.http.get('http://localhost:8080/Backend/contracts')
+    this.http.get('http://localhost:8080/contracts')
       .subscribe(response => {
         this.response = response;
         this.apps = response as Applications[];
-        console.log(this.response);
       })
   }
 
+  
+
   delete() {
-    this.http.delete('http://localhost:8080/Backend/contracts/' + this.modalId).subscribe((data: any) => this.ngOnInit());
+    this.http.delete('http://localhost:8080/contracts/' + this.modalId).subscribe((data: any) => this.ngOnInit());
     this.clearInputBox();
     this.isEditing = false;
     this.showDeleteAlert();
   }
 
   modalId: any = '';
-  modalName: any = '';
-  modalDescription: any = '';
+  modalClient: any = '';
+  modalContract: any = '';
   modalIndex: any;
 
-  askIfDelete(id: any, name: any, desc: any, index: number) {
+  askIfDelete(id: any, client: any, desc: any, index: number) {
     document.getElementById("openDeleteModal").click();
     this.modalId = id;
-    this.modalName = name;
-    this.modalDescription = desc;
+    this.modalClient = client;
+    this.modalContract = desc;
     this.modalIndex = index;
   }
 
 
   put(id: any) {
-    this.http.put('http://localhost:8080/Backend/contracts/' + id, {
+    this.http.put('http://localhost:8080/contracts/' + id, {
       id: this.inputId,
-      clientName: this.inputName,
-      contractType: this.inputDescription
+      clientName: this.inputClient,
+      contractType: this.inputContract
     }).subscribe((data: any) => this.ngOnInit());
     this.stopEditing();
     this.showUpdateAlert();
@@ -71,10 +70,10 @@ export class MainComponent implements OnInit {
 
   post() {
     if (this.checkInputLength() || this.checkIfAlreadyExist() || this.checkIfNumber()) return;
-    this.http.post('http://localhost:8080/Backend/contracts', {
+    this.http.post('http://localhost:8080/contracts', {
       id: this.inputId,
-      clientName: this.inputName,
-      contractType: this.inputDescription
+      clientName: this.inputClient,
+      contractType: this.inputContract
     }).subscribe((data: any) => this.ngOnInit());
     this.showSuccessAlert();
     this.clearInputBox();
@@ -86,8 +85,8 @@ export class MainComponent implements OnInit {
     for (let i = 0; i < this.apps.length; i++) {
       if (this.apps[i].id == this.inputId) {
         this.modalId = this.apps[i].id;
-        this.modalName = this.apps[i].clientName;
-        this.modalDescription = this.apps[i].contractType;
+        this.modalClient = this.apps[i].clientName;
+        this.modalContract = this.apps[i].contractType;
         this.askIfUpdate();
         return true;
       }
@@ -100,11 +99,11 @@ export class MainComponent implements OnInit {
   }
 
   checkInputLength() {
-    if (this.inputId.length > 150 || this.inputDescription.length > 150 || this.inputName.length > 150) {
+    if (this.inputId.length > 150 || this.inputContract.length > 150 || this.inputClient.length > 150) {
       this.showTooLongInputAlert();
       return true;
     }
-    if (this.inputId.length < 3) {
+    if (this.inputId.length < 1) {
       this.showEmptyInputAlert();
       return true;
     }
@@ -131,9 +130,9 @@ export class MainComponent implements OnInit {
   edit(id: any, index: number) {
     this.isEditing = true
     this.inputId = this.apps[index].id;
-    this.inputName = this.apps[index].clientName;
-    this.inputDescription = this.apps[index].contractType;
-    this.editName();
+    this.inputClient = this.apps[index].clientName;
+    this.inputContract = this.apps[index].contractType;
+    this.editClient();
   }
 
 
@@ -142,10 +141,10 @@ export class MainComponent implements OnInit {
     this.clearInputBox();
   }
 
-  @ViewChild("name") nameField: ElementRef;
-  editName(): void {
+  @ViewChild("client") clientField: ElementRef;
+  editClient(): void {
     setTimeout(() => {
-      this.nameField.nativeElement.focus();
+      this.clientField.nativeElement.focus();
     }, 0);
   }
   //------ End of Changes while editing records ------
@@ -185,9 +184,16 @@ export class MainComponent implements OnInit {
 
   clearInputBox() {
     this.inputId = '';
-    this.inputName = '';
-    this.inputDescription = '';
+    this.inputClient = '';
+    this.inputContract = '';
   }
+
+  logout() {
+    localStorage.removeItem('userToken');
+    this.router.navigate(['/login']);
+  }
+
+  
 }
 
 interface Applications {

@@ -29,7 +29,6 @@ export class RegisterComponent implements OnInit {
   }
 
   OnSubmit(form: NgForm) {
-    console.log(form.value);
     this.userService.registerUser(form.value).subscribe((data: any) => {
       if(data.response=="User added succesfully"){
         this.toastr.success(data.response);
